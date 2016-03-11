@@ -1,41 +1,33 @@
 var nock = require("nock");
 var heap = require("..");
 
-describe("Client#track", function() {
+describe("heap.Client#track", function() {
   beforeEach(function() {
     this.client = heap("test-app-id");
   });
 
-  it("throws when the client has an invalid application ID", function() {
-    var client = this.client;
-    client.appId = null;
-    expect(function() {
-      client.track("test_track_with_invalid_app_id", "test-identity",
-          { "key": "value" });
-    }).to.throw(Error, "Invalid Heap application ID: null");
+  it("errors out when the client has an invalid application ID", function() {
+    this.client.appId = null;
+    expect(this.client.track("test_track_with_invalid_app_id", "test-identity",
+        { "key": "value" })).to.be.rejectedWith(TypeError,
+        /^Invalid Heap application ID: null$/);
   });
 
-  it("throws when the event name is invalid", function() {
-    var client = this.client;
-    expect(function() {
-      client.track(null, "test-identity", { "key": "value" });
-    }).to.throw(Error, "Invalid event name: null");
+  it("errors out when the event name is invalid", function() {
+    expect(this.client.track(null, "test-identity", { "key": "value" })).to.be.
+        rejectedWith(Error, /^Invalid event name: null$/);
   });
 
-  it("throws when the identity is invalid", function() {
-    var client = this.client;
-    expect(function() {
-      client.track("test_track_with_invalid_identity", null,
-          { "key": "value" });
-    }).to.throw(Error, "Invalid identity: null");
+  it("errors out when the identity is invalid", function() {
+    expect(this.client.track("test_track_with_invalid_identity", null,
+          { "key": "value" })).to.be.rejectedWith(TypeError,
+          /^Invalid identity: null$/);
   });
 
-  it("throws when the properties dictionary is invalid", function() {
-    var client = this.client;
-    expect(function() {
-      client.track("test_track_with_invalid_properties", "test-identity",
-          true);
-    }).to.throw(Error, "Invalid properties: true");
+  it("errors out when the properties dictionary is invalid", function() {
+    expect(this.client.track("test_track_with_invalid_properties",
+        "test-identity", true)).to.be.rejectedWith(Error,
+        /^Invalid properties: true$/);
   });
 
   describe("with a mock backend", function() {

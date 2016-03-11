@@ -1,31 +1,25 @@
 var nock = require("nock");
 var heap = require("..");
 
-describe("Client#addUserProperties", function() {
+describe("heap.Client#addUserProperties", function() {
   beforeEach(function() {
     this.client = heap("test-app-id");
   });
 
-  it("throws when the client has an invalid application ID", function() {
-    var client = this.client;
-    client.appId = null;
-    expect(function() {
-      client.addUserProperties("test-identity", { "key": "value" });
-    }).to.throw(TypeError, "Invalid Heap application ID: null");
+  it("errors out when the client has an invalid application ID", function() {
+    this.client.appId = null;
+    expect(this.client.addUserProperties(null, { "key": "value" })).to.be.
+        rejectedWith(TypeError, /^Invalid identity: null$/);
   });
 
-  it("throws when the identity is invalid", function() {
-    var client = this.client;
-    expect(function() {
-      client.addUserProperties(null, { "key": "value" });
-    }).to.throw(TypeError, "Invalid identity: null");
+  it("errors out when the identity is invalid", function() {
+    expect(this.client.addUserProperties(null, { "key": "value" })).to.be.
+        rejectedWith(TypeError, /^Invalid identity: null$/);
   });
 
-  it("throws when the properties dictionary is invalid", function() {
-    var client = this.client;
-    expect(function() {
-      client.addUserProperties("test-identity", true);
-    }).to.throw(TypeError, "Invalid properties: true");
+  it("errors out when the properties dictionary is invalid", function() {
+    expect(this.client.addUserProperties("test-identity", true)).to.be.
+        rejectedWith(TypeError, /^Invalid properties: true$/);
   });
 
   describe("with a mock backend", function() {

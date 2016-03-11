@@ -32,9 +32,41 @@ Create an API client.
 var heap = require('heap-api')('YOUR_APP_ID');
 ```
 
+### Recommended Usage Patterns
+
+
+[Track](https://heapanalytics.com/docs/server-side#track) a server-side event
+in a fire-and-forget fashion.
+
+```javascript
+heap.track('event-name', 'user-identity');
+heap.track('event-name', 'user-identity', { property: 'value' });
+```
+
+[Add properties](https://heapanalytics.com/docs/server-side#identify) to a
+user. Take advantage of the returned
+[ES6 Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+to do more work when the call completes.
+
+```javascript
+heap.addUserProperties('user-identity', { plan: 'premium1' })
+.then(function() {
+  // Do more work.
+});
+```
+
+Set up an [event](https://nodejs.org/api/events.html) listener to log Heap API
+call failures.
+
+```javascript
+heap.on('error', function(error) {
+  console.error(error);
+});
+```
+
 ### Callback-Based Usage
 
-[Track](https://heapanalytics.com/docs/server-side#track) a server-side event.
+Track a server-side event.
 
 ```javascript
 heap.track('event-name', 'user-identity', function(error) {
@@ -52,8 +84,7 @@ heap.track('event-name', 'user-identity', { property: 'value' }, function(error)
 });
 ```
 
-[Add properties](https://heapanalytics.com/docs/server-side#identify) to a
-user.
+Add properties to a user.
 
 ```javascript
 heap.addUserProperties('user-identity', { plan: 'premium1' }, function(error) {

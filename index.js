@@ -16,10 +16,11 @@ var Client = require("./lib/client.js");
  *   calls
  * @param {string} options.userAgent the User-Agent header value used by this
  *   Heap API client
- * @returns {module:heap.Client} the new client
+ * @returns {heap-api.Client} the new client
  */
 module.exports = function(appId, options) {
   return new Client(appId, options);
 };
 
+module.exports.ApiError = require("./lib/api_error.js");
 module.exports.Client = Client;

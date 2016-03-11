@@ -39,6 +39,7 @@
       "destination": "./doc/",
       "package": "./package.json",
       "readme": "./README.md",
+      "private": true,
       "recurse": true
   }
 }

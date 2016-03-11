@@ -1,6 +1,6 @@
 var heap = require("..");
 
-describe("Client", function() {
+describe("heap.Client", function() {
   beforeEach(function() {
     this.client = heap("test-app-id");
   });
