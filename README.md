@@ -1,3 +1,5 @@
+_This module is deprecated._
+
 # Heap Server-Side API Client for Node.js
 
 [![Build Status](https://travis-ci.org/heap/heap-node.svg?branch=master)](https://travis-ci.org/heap/heap-node)
