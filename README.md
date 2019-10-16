@@ -1,6 +1,6 @@
 _This module is deprecated._
 
-# Heap Server-Side API Client for Node.js
+# (DEPRECATED) Heap Server-Side API Client for Node.js
 
 [![Build Status](https://travis-ci.org/heap/heap-node.svg?branch=master)](https://travis-ci.org/heap/heap-node)
 [![Coverage Status](https://coveralls.io/repos/github/heap/heap-node/badge.svg?branch=master)](https://coveralls.io/github/heap/heap-node?branch=master)
@@ -10,6 +10,10 @@ _This module is deprecated._
 This is a [node.js](https://nodejs.org/) client for the
 [Heap](https://heapanalytics.com/)
 [server-side API](https://heapanalytics.com/docs/server-side).
+
+## Notice
+
+This client is deprecated and this repo is no longer maintained or supported.
 
 
 ## Prerequisites
